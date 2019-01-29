@@ -46,6 +46,22 @@ hbs.registerHelper("buildDropDown", (property, item) => {
 
     return string
 })
+app.use(function(req, res) {
+    res.status(404);
+    var classArray = ['still', 'rotate', 'shrink']
+    var numberOfDivs = Math.floor(Math.random() * 31) + 20
+    var htmlString =''
+    for(var i = 0; i < numberOfDivs; i++){
+        var classNumber = Math.floor(Math.random() * 3)
+        htmlString += `<div class="${classArray[classNumber]}">404</div>`
+    }
+    res.render('error.hbs', {htmlString: htmlString} )
+ });
+
+hbs.registerHelper('error404', () => {
+
+})
+
 
 app.listen(3000, () => {
     console.log('Server is up at localhost:3000')
