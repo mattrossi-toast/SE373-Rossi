@@ -7,18 +7,7 @@ app.set('view engine', 'hbs');
 app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded());
 
-hbs.registerHelper("buildDropDown", () => {
-    var string = '<select name="number">'
-    var options = [3,4,5,10,20]
 
-    for(number in options){
-        string += '<option value=' + options[number] + '>'+ options[number] + '</option>'
-    }
-
-    string += '</select>'
-
-    return string
-})
 
 app.get("/", (req,res)=> { res.render('index.hbs') })
 
@@ -36,9 +25,27 @@ app.post("/", (req,res) => {
         string += '</tbody></table>'
         return string
     });
-    res.render('index.hbs')
+    res.render('index.hbs', {number: req.body.number})
 
 });
+
+hbs.registerHelper("buildDropDown", (property, item) => {
+  
+    
+    var string = '<select name="number">'
+    var options = [3,4,5,10,20]
+    for(number in options){
+        string += `<option value=${options[number]}` 
+        if(property == options[number]){
+            string += ' selected'
+        } 
+        string+= `> ${options[number]} </option>`
+    }
+
+    string += '</select>'
+
+    return string
+})
 
 app.listen(3000, () => {
     console.log('Server is up at localhost:3000')
