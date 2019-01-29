@@ -1,0 +1,9 @@
+{
+  "name": "lab3",
+  "version": "1.0.0",
+  "lockfileVersion": 1,
+  "dependencies": {
+    "express": "^4.16.4",
+    "hbs": "^4.0.1"
+  }
+}
